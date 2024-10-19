@@ -1,6 +1,6 @@
 ---
 layout: page
-name: AI Programming
+name: AI 프로그래밍
 tools: [C++, A* Algorithm]
 image: "/assets/images/background/ai.JPG"
 ---

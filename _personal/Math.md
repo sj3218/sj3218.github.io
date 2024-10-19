@@ -1,7 +1,7 @@
 ---
 layout: page
-name: Math
-tools: [C++, C#, OpenCV]
+name: 수학 프로그래밍
+tools: [C++, C#, OpenCV, K-means]
 image: "/assets/images/background/math.JPG"
 ---
 

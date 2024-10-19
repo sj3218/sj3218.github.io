@@ -1,8 +1,8 @@
 ---
-layout: page
-title: Resume
-permalink: /resume/
-weight: 3
+#layout: page
+#title: Resume
+#permalink: /resume/
+#weight: 3
 ---
 
     <center>

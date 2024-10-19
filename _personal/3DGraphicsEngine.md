@@ -1,6 +1,6 @@
 ---
 layout: page
-name: Liquid Monsters
+name: 3D 그래픽스 엔진
 tools: [C++, OpenGL, Custom Engine, 3D]
 image: "/assets/images/background/graphics.JPG"
 ---
@@ -470,7 +470,6 @@ vec3 CubeMapping(vec3 pos)
 /assets/images/graphics_engine/graphics_environment/chromatic_aberration.JPG
 /assets/images/graphics_engine/graphics_environment/blending_reflection.JPG
 {% endcapture %}
-{% include elements/carousel.html %}
 
 
 ### Dynamics 빛 구현
@@ -482,4 +481,3 @@ vec3 CubeMapping(vec3 pos)
 /assets/images/graphics_engine/directional.JPG
 /assets/images/graphics_engine/spot_light.JPG
 {% endcapture %}
-{% include elements/carousel.html %}
