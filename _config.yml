@@ -40,6 +40,10 @@ collections:
     output: true
     permalink: /projects/:name
 
+  personal:
+    output: true
+    permalink: /personal/:name
+
 
 ### Disqus ###
 #disqus:
