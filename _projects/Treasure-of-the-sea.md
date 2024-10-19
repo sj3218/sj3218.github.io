@@ -25,7 +25,7 @@ image: "/assets/images/background/treasure.JPG"
     <h2>Project Info</h2><br>
     <p>👨‍💻 직책: 게임플레이 프로그래머</p>
     <p>👥 팀 규모: 2</p>
-    <p>⏳ 개발 기간: 2021.09 ~ 2021.12</p>
+    <p>⏳ 개발 기간: 2022.05 ~ 2021.08</p>
     <p>🛠️ Engine: Unity Engine</p>
     <p>⚙️ Files 다운로드: <button onclick="window.location.href='https://github.com/wonju-cho/FreezeTag/tree/main/Assets/Scripts';">소스파일 다운로드</button></p>
   </div>
