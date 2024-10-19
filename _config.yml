@@ -1,11 +1,11 @@
 ### Site Settings ###
 title               : Sejeong Park
 description         : >-
-                      Portfolio website
-baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
-repository          : sj3218/sj3218.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
-remote_theme        : YoussefRaafatNasry/portfolYOU
-open_new_tab        : false                             # Opens external URLs in new tab (works for posts, projects and navbar only)
+                      안녕하세요! 박세정이라고 합니다 :wave:
+baseurl             : ""            # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
+repository          : sj3218/sj3218.github.io      # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
+remote_theme        : yousinix/portfolYOU
+open_new_tab        : false                    # Opens external URLs in new tab (works for posts, projects and navbar only)
 
 
 ### Plugins ###
@@ -42,8 +42,8 @@ collections:
 
 
 ### Disqus ###
-disqus:
-  shortname: your-short-name-disqus                     # Your website Shortname on disqus
+#disqus:
+#  shortname: your-short-name-disqus                     # Your website Shortname on disqus
 
 
 ### Analytics ###
@@ -55,12 +55,12 @@ analytics:
 
 ### Buy me a coffee ###
 # See https://www.buymeacoffee.com/
-buymeacoffee:
-  enabled: false
-  username: your_username
-  color: "#007bff"
-  message: "Thank you for visiting."                    # Message to be displayed aside from the button for a few seconds.
-  description: "Support me on Buy me a coffee!"
+#buymeacoffee:
+#  enabled: false
+#  username: your_username
+#  color: "#007bff"
+#  message: "Thank you for visiting."                    # Message to be displayed aside from the button for a few seconds.
+#  description: "Support me on Buy me a coffee!"
 
 
 ### Defaults for collections ###
