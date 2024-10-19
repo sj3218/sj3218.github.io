@@ -1,7 +1,7 @@
 ---
 layout: page
 name: Liquid Monsters
-tools: [Game, Puzzle, Casual, 2D, Custom Engine]
+tools: [Game, Puzzle, 2D, Custom Engine]
 image: "/assets/images/background/liquid.JPG"
 ---
 
