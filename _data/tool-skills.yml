@@ -1,0 +1,24 @@
+- name: Visual Studio
+  percentage: 90
+  color: 00ab6c
+
+- name: OpenGL
+  percentage: 80
+  color: danger
+
+- name: Git/SVN
+  percentage: 80
+  color: 1769ff
+
+- name: gcc/g++
+  percentage: 80
+  color: 1db954
+
+- name: GLEW/GLFW
+  percentage: 70
+  color: 3b5998
+
+- name: gcc/g++
+  percentage: 70
+  color: secondary
+

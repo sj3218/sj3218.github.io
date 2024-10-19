@@ -7,11 +7,6 @@ const themes = {
   DARK: "dark",
 };
 
-const lang_themes = {
-    ENG: "english",
-    KOR: "korea",
-};
-
 initTheme();
 
 function initTheme() {
