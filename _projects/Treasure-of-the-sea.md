@@ -2,12 +2,12 @@
 layout: page
 name: Freeze Tag
 tools: [Game, VR, 3D, Unity]
-image: "/assets/images/background/freeze.JPG"
+image: "/assets/images/background/treasure.JPG"
 ---
 
 # Liquid Monsters
 <br>
-{% include elements/video.html id="WP4t_LqYApI" %}
+{% include elements/video.html id="BgBBYVEOf8c" %}
 
 <br>
 
