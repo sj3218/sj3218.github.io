@@ -5,7 +5,7 @@ tools: [Game, UE4, 3D]
 image: "/assets/images/background/mas.JPG"
 ---
 
-# Liquid Monsters
+# Monster-A-Salt
 <br>
 {% include elements/video.html id="nuN-XHJQ6So" %}
 
@@ -15,10 +15,10 @@ image: "/assets/images/background/mas.JPG"
   <div style="background-color: #2c2c2c; padding: 20px; border-radius: 8px; color: white; width: 50%;">
     <h2>Description</h2><br>
     <p>
-       Monster-A-Salt는 활 전투를 사용하는 3인칭 사냥 및 요리 게임입니다. 플레이어는 보스를 물리치는 데 필요한 업그레이드를 제공하는 요리를 만드는 데 사용되는 재료를 수집하여 레벨을 통과해야 합니다. 이 프로젝트는 Unreal Engine 4.26을 사용하여 만들어졌습니다.
+       Monster-A-Salt는 활 전투를 사용하는 3D 사냥 및 요리 게임입니다. 플레이어는 보스를 물리치는 데 필요한 업그레이드를 제공하는 요리를 만드는 데 사용되는 재료를 수집하여 레벨을 통과해야 합니다. 이 프로젝트는 Unreal Engine 4.26을 사용하여 만들어졌습니다.
     </p>
     <p>
-      df
+      저는 플레이어 무브먼트와 활을 이용한 싸움을 구현하였습니다.
     </p>
   </div>
   <div style="background-color: #2c2c2c; padding: 20px; border-radius: 8px; color: white; width: 50%;">
@@ -27,8 +27,183 @@ image: "/assets/images/background/mas.JPG"
     <p>👥 팀 규모: 16</p>
     <p>⏳ 개발 기간: 2021.09 ~ 2021.12</p>
     <p>🛠️ Engine: Unreal Engine 4</p>
-    <p>⚙️ Files 다운로드: <button onclick="window.location.href='https://github.com/wonju-cho/FreezeTag/tree/main/Assets/Scripts';">소스파일 다운로드</button></p>
+    <p>⚙️ Files: <button onclick="window.location.href='https://github.com/wonju-cho/FreezeTag/tree/main/Assets/Scripts';">소스파일</button></p>
   </div>
 </div>
 
+<br>
+
+### **플레이어 무브먼트와 활 무기**
+###### 이 프로젝트에서 모든 팀원들이 처음 언리얼 엔진을 사용했기에 팀원 모두 유튜브 튜토리얼과 언리얼 엔진 사이트를 참고하며 구현을 하였습니다. 먼저 MoveForward와 같은 좌 우 앞 뒤 점프 대쉬 등의 함수들을 구현을 하였습니다.
+```c++
+void ACharacterMovement::MoveForward(float AxisValue)
+{
+    if (Controller != NULL && AxisValue != 0.f)
+    {
+		FRotator rotation = Controller->GetControlRotation();
+		rotation.Pitch = 0.f;
+
+		FVector direction = FRotationMatrix(rotation).GetScaledAxis(EAxis::X);
+		
+		AddMovementInput(direction, AxisValue);
+    }
+}
+```
+###### 그런 다음 SetupPlayerInputComponent에서 input과 움직이는 함수를 바인딩 시켰습니다.
+```c++
+void ACharacterMovement::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+    Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+    PlayerInputComponent->BindAxis("MoveForward", this, &ACharacterMovement::MoveForward);
+    PlayerInputComponent->BindAxis("MoveRight", this, &ACharacterMovement::MoveRight);
+    PlayerInputComponent->BindAxis("TurnRate", this, &ACharacterMovement::TurnAtRate);
+    PlayerInputComponent->BindAxis("LookUpRate", this, &ACharacterMovement::LookUpAtRate);
+    PlayerInputComponent->BindAxis("Turn", this, &ACharacterMovement::AddControllerYawInput);
+    PlayerInputComponent->BindAxis("LookUp", this, &ACharacterMovement::AddControllerPitchInput);
+
+    PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacterMovement::StartJump);
+    PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacterMovement::StopJump);
+    PlayerInputComponent->BindAction("Dash", IE_Pressed, this, &ACharacterMovement::Dash);
+
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ACharacterMovement::StartCharge);
+	PlayerInputComponent->BindAction("Fire", IE_Released, this, &ACharacterMovement::StopCharge);
+}
+```
+
+###### 저희 게임에서는 활을 무기로 사용하는 게임이었기에 캐릭터가 활 시위를 당기는 함수가 필요하였습니다. StartCharge()에서 당기는 시간을 업데이트 시키고 canFire 변수를 true로 바꾸어 주었습니다.
+```c++
+void ACharacterMovement::StartCharge()
+{
+	UWorld* world = GetWorld();
+
+	if (world)
+	{
+		FVector cameraLookVector = pCamera->GetForwardVector();
+		FRotator cameraRotator = cameraLookVector.Rotation();
+		FRotator ownerRotator = this->GetActorRotation();
+		ownerRotator.Yaw = cameraRotator.Yaw;
+
+		this->SetActorRotation(ownerRotator);
+		chargeTime = world->GetTimeSeconds();
+		canFire = true;
+		checkingCharge = true;
+	}
+}
+```
+###### 이후 플레이어가 마우스 버튼을 놓았을 당시 StopCharge()를 불러와서 화살이 발사 조건에 충족을 시키면 Fire()를 호출하여 화살을 발사시킵니다.
+```c++
+void ACharacterMovement::StopCharge()
+{
+	if (canFire)
+	{
+		UWorld* world = GetWorld();
+		if (world)// calculate charge time
+		{
+			float worldTime = world->GetTimeSeconds();
+			chargeTime = worldTime - chargeTime;
+			//UE_LOG(LogTemp, Warning, TEXT("charge time : %f"), chargeTime);
+			//UE_LOG(LogTemp, Warning, TEXT("rate of arrow : %f"), rateOfArrow);
+		}
+
+		if (chargeTime < minChargeTime)
+		{
+			//do not fire
+			chargeTime = world->GetTimeSeconds();
+			checkingCharge = false;
+		}
+		else
+		{
+			if (chargeTime > maxChargeTime)
+			{
+				chargeTime = maxChargeTime;
+				arrowVelocity = maxArrowVelocity;
+				pPlayerStats->SetCurrentArrowVelocity(arrowVelocity);
+				//UE_LOG(LogTemp, Warning, TEXT("Arrow Velocity : %f"), arrowVelocity);
+				//pPlayerStats->SetAttackDamage(damage);
+				Fire();
+			}
+			else
+			{
+				float time = chargeTime - minChargeTime;
+				arrowVelocity += rateOfArrow * time;
+				pPlayerStats->SetCurrentArrowVelocity(arrowVelocity);
+				//UE_LOG(LogTemp, Warning, TEXT("Arrow Velocity : %f"), arrowVelocity);
+				//pPlayerStats->SetAttackDamage(damageOfPowerShot);
+				Fire();
+			}
+		}
+	}
+}
+```
+###### Fire함수에서는 AArrowProjectile라는 화살을 생성하고 속도를 업데이트 시켜줍니다. 화살에는 CollisionComponent를 가지고 있어 적에게 닿았을 시 적의 hp를 닳게 하였습니다.
+```c++
+void ACharacterMovement::Fire()
+{
+	if (projectileClass)
+	{
+		FVector eyeLocation;
+		FRotator eyeRotation;
+		GetActorEyesViewPoint(eyeLocation, eyeRotation);
+		
+		FVector worldLocation;
+		FVector worldDirection;
+		FRotator newRot;
+		GetWorld()->GetGameViewport()->GetViewportSize(viewPort);
+		APlayerController* controller = GetWorld()->GetFirstPlayerController();
+
+		if (controller->DeprojectScreenPositionToWorld(viewPort.X/2.f, viewPort.Y/2.f, worldLocation, worldDirection))
+		{
+			//UE_LOG(LogTemp, Warning, TEXT("detect viewport position"));
+			//UE_LOG(LogTemp, Warning, TEXT("viewport position : %f, %f"), viewPort.X/2, viewPort.Y/2);
+			newRot = UKismetMathLibrary::FindLookAtRotation(eyeLocation, -worldLocation);
+		}
+
+		FVector muzzleLocation = eyeLocation + FTransform(eyeRotation).TransformVector(MuzzleOffset);
+		FRotator muzzleRotation = eyeRotation;
+		muzzleRotation.Pitch += pPlayerStats->GetArrowPitch();
+
+		UWorld* world = GetWorld();
+		if (world)
+		{
+			FActorSpawnParameters spawnParam;
+			spawnParam.Owner = this;
+			spawnParam.Instigator = GetInstigator();
+
+			AArrowProjectile* projectile = world->SpawnActor<AArrowProjectile>(projectileClass, muzzleLocation, muzzleRotation, spawnParam);
+			
+			if (projectile)
+			{
+				FVector launchDir = muzzleRotation.Vector();
+				projectile->SetArrowSpeed(arrowVelocity);
+				projectile->FireDirection(launchDir);
+				projectile->arrowDamage = pPlayerStats->GetAttackDamage();
+			}
+
+			chargeTime = world->GetTimeSeconds(); 
+			arrowVelocity = minArrowVelocity;
+			pPlayerStats->SetCurrentArrowVelocity(arrowVelocity);
+		}
+
+		ResetArrow();
+		//GetWorldTimerManager().SetTimer(UnusedHandle, this, &ACharacterMovement::ResetArrow, 0.0, false);
+	}
+}
+```
+
+{% capture carousel_images %}
+/assets/images/monster_a_salt/monster_menu.JPG
+/assets/images/monster_a_salt/monster_game.JPG
+/assets/images/monster_a_salt/monster_game_2.JPG
+/assets/images/monster_a_salt/monster_cook.JPG
+/assets/images/monster_a_salt/monster_craft.JPG
+/assets/images/monster_a_salt/monster_boss.JPG
+{% endcapture %}
+{% include elements/carousel.html %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
