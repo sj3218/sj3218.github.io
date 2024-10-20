@@ -126,6 +126,7 @@ if (type == 0)//x축
 ###### Data Science 수학 수업에서 K-means Clustering 알고리즘에 대해서 배우고 이 알고리즘을 이용하여 입력 받은 사진이 k값에 따라 어떤 결과 값을 갖는지 테스트 해보고자 한 프로젝트 입니다. 
 ###### 이 프로젝트는 C++과 OpenCV를 사용하여 구현였습니다. 인풋된 이미지를 받아와 RGB를 저장하고 k 값이 3부터 차례대로 늘어나며 어떤 결과 값을 보여주는지 이미지를 아웃풋 시킵니다. k 값은 이미지에서 보여줄 수 있는 색깔의 종류 갯수입니다. 사진에 보이는 것 처럼 k가 3일 때는 세개의 색상만을 보여줍니다.
 
+<!--
 {% capture carousel_images %}
 /assets/images/math/k_means/mario_3.jpg
 /assets/images/math/k_means/mario_4.jpg
@@ -137,6 +138,45 @@ if (type == 0)//x축
 /assets/images/math/k_means/mario_10.jpg
 {% endcapture %}
 {% include elements/carousel.html %}
+
+-->
+<div id="carousel2" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/assets/images/math/k_means/mario_3.jpg" class="d-block w-100" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="/assets/images/math/k_means/mario_4.jpg" class="d-block w-100" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="/assets/images/math/k_means/mario_5.jpg" class="d-block w-100" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="/assets/images/math/k_means/mario_6.jpg" class="d-block w-100" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="/assets/images/math/k_means/mario_7.jpg" class="d-block w-100" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="/assets/images/math/k_means/mario_8.jpg" class="d-block w-100" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="/assets/images/math/k_means/mario_9.jpg" class="d-block w-100" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="/assets/images/math/k_means/mario_10.jpg" class="d-block w-100" alt="">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carousel2" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel2" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
 <br>
 
 ###### 마리오 원본 사진
