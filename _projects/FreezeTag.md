@@ -36,7 +36,8 @@ image: "/assets/images/background/freeze.JPG"
 
 ### **AI**
 
-##### Unity에서 navmesh와 A* 알고리즘을 이용해 게임 ai를 만들 수 있도록 제공하는 것은 알고있습니다. 그래도 Unity를 사용해서 A* 알고리즘을 직접 개발하여 게임에 적용시키고 싶어 시작했습니다. FindPathUsingAstar 함수를 만들어 적의 위치에서 플레이어 위치를 찾을 수 있다면 true를 리턴시키도록 하였습니다. 저는 navemesh가 아닌 격자 칸을 이용해서 Unity가 제공하는 ai 함수보다 성능이 떨어졌지만 이 경험을 통해 A* 알고리즘에 대해서 더 공부할 수 있었습니다.
+###### Unity에서 navmesh와 A* 알고리즘을 이용해 게임 ai를 만들 수 있도록 제공하는 것은 알고있습니다. 그래도 Unity를 사용해서 A* 알고리즘을 직접 개발하여 게임에 적용시키고 싶어 시작했습니다. 
+###### FindPathUsingAstar 함수를 만들어 적의 위치에서 플레이어 위치를 찾을 수 있다면 true를 리턴시키도록 하였습니다. 
 ```c#
 public bool FindPathUsingAStar(Vector3 playerPos, Vector3 enemyPos)
     {
@@ -94,12 +95,13 @@ public bool FindPathUsingAStar(Vector3 playerPos, Vector3 enemyPos)
         return false;
     }
 ```
+###### 저는 navemesh가 아닌 격자 칸을 이용해서 Unity가 제공하는 ai 함수보다 성능이 떨어졌지만 이 경험을 통해 A* 알고리즘에 대해서 더 공부할 수 있었습니다.
 <br>
 
 ### **플레이어 시야**
 
-##### 플레이어가 적을 바라볼 때 보이는 적들의 움직임을 멈추도록 구현하였습니다. 
-##### EnemyInRadius 함수를 만들어 적이 플레이어 반경 안에 들어오는지 확인을 했습니다. 시야 각에 들어오더라도 멀리 떨어진 적들은 움직일 수 있도록 하기 위해서 였습니다.
+###### 플레이어가 적을 바라볼 때 보이는 적들의 움직임을 멈추도록 구현하였습니다. 
+###### EnemyInRadius 함수를 만들어 적이 플레이어 반경 안에 들어오는지 확인을 했습니다. 시야 각에 들어오더라도 멀리 떨어진 적들은 움직일 수 있도록 하기 위해서 였습니다.
 ```c#
 private bool EnemyInRadius(Vector3 enemyPos)
     {
@@ -118,7 +120,7 @@ private bool EnemyInRadius(Vector3 enemyPos)
     }
 
 ```
-##### 반경 안에 들어온 적들 중 플레이어가 볼 수 있는 적을 확인하고 그 적의 isVisibleFromPlayer를 true로 바꾸어 멈출 수 있도록 했습니다.
+###### 반경 안에 들어온 적들 중 플레이어가 볼 수 있는 적을 확인하고 그 적의 isVisibleFromPlayer를 true로 바꾸어 멈출 수 있도록 했습니다.
 ```c#
 void FindVisibleEnemy()
     {
@@ -154,9 +156,10 @@ void FindVisibleEnemy()
 
 ### **Cellphone UI**
 ![alt text](
-  ./assets/images/freeze_tag/FreezeTag_CellPhoneUI.jpg)
-##### 플레이어가 게임 중 미니맵, 탈출을 시킨 NPC 수, Health 수, 모은 보석 수에 대해서 확인 할 수 있도록 휴대폰 UI를 구현하였습니다.
-##### 모든 조건들이 맞아 떨어지는지 DoesGameEnd()함수를 불러 확인하고 게임을 종료할 수 있게 하였습니다.
+  /assets/images/freeze_tag/FreezeTag_CellPhoneUI.jpg)
+  
+###### 플레이어가 게임 중 미니맵, 탈출을 시킨 NPC 수, Health 수, 모은 보석 수에 대해서 확인 할 수 있도록 휴대폰 UI를 구현하였습니다.
+###### 모든 조건들이 맞아 떨어지는지 DoesGameEnd()함수를 불러 확인하고 게임을 종료할 수 있게 하였습니다.
 ```c#
 public void DoesGameEnd()
     {

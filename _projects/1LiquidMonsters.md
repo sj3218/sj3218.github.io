@@ -42,18 +42,18 @@ image: "/assets/images/background/liquid.JPG"
 ###### 위의 영상은 Debugging 모드 영상입니다.
 <br>
 
-##### 디자이너들이 요청하는 사항에 따라 에디터 툴을 설계하고 구현했습니다. 
-##### **Level Editor** 부분은 오브젝트들을 생성하거나 삭제를 할 수 있도록 하였습니다. 생성된 오브젝트들은 마우스를 통해 맵에 원하는 위치에 이동 시킬 수 있고 텍스처와 애니메이션을 적용할 수 있도록 하였습니다. 
-##### **Tile Editor**에서는 그래픽스 타일과 물리 타일을 마우스로 드래그 하여 맵을 디자인 할 수 있도록 하였고 흰색으로 테두리로 표시된 타일은 물리 타일로 플레이어가 올라 갈 수 있는 타일입니다. 
-##### **Player Information**에서는 플레이어의 위치나 속도를 볼 수 있도록 인터페이스를 제공했습니다.
+###### 디자이너들이 요청하는 사항에 따라 에디터 툴을 설계하고 구현했습니다. 
+###### **Level Editor** 부분은 오브젝트들을 생성하거나 삭제를 할 수 있도록 하였습니다. 생성된 오브젝트들은 마우스를 통해 맵에 원하는 위치에 이동 시킬 수 있고 텍스처와 애니메이션을 적용할 수 있도록 하였습니다. 
+###### **Tile Editor**에서는 그래픽스 타일과 물리 타일을 마우스로 드래그 하여 맵을 디자인 할 수 있도록 하였고 흰색으로 테두리로 표시된 타일은 물리 타일로 플레이어가 올라 갈 수 있는 타일입니다. 
+###### **Player Information**에서는 플레이어의 위치나 속도를 볼 수 있도록 인터페이스를 제공했습니다.
 
 
 <br>
 
 ### **데이터 관리 시스템 구현**
 
-##### 개발 중 레벨이 이동할 때마다 텍스처 로딩 시간이 길어져 게임 플레이의 몰입감을 저하시키는 문제가 발생했습니다. 이를 해결하기 위해 데이터 관리 시스템을 설계 및 구현했습니다. 텍스처의 이름과 파일 경로를 **.dat** 파일에 저장하고 게임 시작 시 모든 텍스처를 한 번에 초기화하여 미리 불러오는 방식으로 최적화하였습니다. 
-##### 먼저 아래의 형식처럼 텍스처의 이름과 파일 경로를 All_Sprite.dat 파일에 저장했습니다.
+###### 개발 중 레벨이 이동할 때마다 텍스처 로딩 시간이 길어져 게임 플레이의 몰입감을 저하시키는 문제가 발생했습니다. 이를 해결하기 위해 데이터 관리 시스템을 설계 및 구현했습니다. 텍스처의 이름과 파일 경로를 **.dat** 파일에 저장하고 게임 시작 시 모든 텍스처를 한 번에 초기화하여 미리 불러오는 방식으로 최적화하였습니다. 
+###### 먼저 아래의 형식처럼 텍스처의 이름과 파일 경로를 All_Sprite.dat 파일에 저장했습니다.
 ```
 OBJECT_WIND	texture/Object/wind.png
 OBJECT_PRESSURE	texture/Object/temp_pressure.png
@@ -62,7 +62,7 @@ TEST_BACKGROUND	texture/Level/test_background.png
 TILE_EXAMPLE_1	texture/Tile/Tile_example_3.png
 TILE_EXAMPLE_2	texture/Tile/Tile_example_2.png
 ```
-##### 텍스쳐를 초기화하는 함수에서는 input파일을 열어 데이터를 읽어 받도록 하였습니다.
+###### 텍스쳐를 초기화하는 함수에서는 input파일을 열어 데이터를 읽어 받도록 하였습니다.
 ```c++
 void Data::Initialize_Texture()
 {
@@ -85,13 +85,13 @@ void Data::Initialize_Texture()
     workerThread.push_back(std::thread{&Data::LoaderThread, this});
 }
 ```
-##### 이후 교수님께서 멀티쓰레딩을 사용하면 이러한 문제를 더욱 효과적으로 해결할 수 있다고 조언해 주셨고, 이를 바탕으로 학부 마지막 학기에 Parallel Programming 수업을 수강하며 관련 지식을 보충했습니다.
+###### 이후 교수님께서 멀티쓰레딩을 사용하면 이러한 문제를 더욱 효과적으로 해결할 수 있다고 조언해 주셨고, 이를 바탕으로 학부 마지막 학기에 Parallel Programming 수업을 수강하며 관련 지식을 보충했습니다.
 <br>
 
 ### **아이템 구현**
 
-##### 게임 내에서 플레이어가 활용할 수 있는 다양한 아이템을 구현했습니다. 예를 들어, 배터리를 사용하여 무빙 박스를 이동시키거나, 버튼을 눌러 플레이어를 띄우는 팬을 작동시키는 등의 아이템들을 구현하였습니다. 
-##### 아이템 구현에는 Component 클래스를 기반으로 하여 각 아이템의 기능을 정의했으며 아이템이 작동할 때마다 그래픽스 타일들을 업데이트하여 사용자들이 변화된 상태를 확인 할 수 있도록 하였습니다.
+###### 게임 내에서 플레이어가 활용할 수 있는 다양한 아이템을 구현했습니다. 예를 들어, 배터리를 사용하여 무빙 박스를 이동시키거나, 버튼을 눌러 플레이어를 띄우는 팬을 작동시키는 등의 아이템들을 구현하였습니다. 
+###### 아이템 구현에는 Component 클래스를 기반으로 하여 각 아이템의 기능을 정의했으며 아이템이 작동할 때마다 그래픽스 타일들을 업데이트하여 사용자들이 변화된 상태를 확인 할 수 있도록 하였습니다.
 ```C++
 void Battery::UpdateWireGraphics(bool isBattery)
 {
@@ -128,6 +128,15 @@ void Battery::UpdateWireGraphics(bool isBattery)
 }
 ```
 
+<br>
+
+## **사진**
+{% capture carousel_images %}
+/assets/images/liquid_monster/liquidmonster_debug.JPG
+/assets/images/liquid_monster/liquidmonster_debug_2.JPG
+/assets/images/liquid_monster/liquidmonster_game_mode.JPG
+{% endcapture %}
+{% include elements/carousel.html %}
 
 <br><br><br><br><br>
 <br>

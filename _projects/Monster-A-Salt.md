@@ -34,7 +34,7 @@ image: "/assets/images/background/mas.JPG"
 <br>
 
 ### **플레이어 무브먼트와 활 무기**
-##### 이 프로젝트에서 모든 팀원들이 처음 언리얼 엔진을 사용했기에 팀원 모두 유튜브 튜토리얼과 언리얼 엔진 사이트를 참고하며 구현을 하였습니다. 먼저 MoveForward와 같은 좌 우 앞 뒤 점프 대쉬 등의 함수들을 구현을 하였습니다.
+###### 플레이어의 움직임을 구현하기 위해 MoveForward와 같은 좌 우 앞 뒤 점프 대쉬 등의 함수들을 작성하였습니다.
 ```c++
 void ACharacterMovement::MoveForward(float AxisValue)
 {
@@ -49,7 +49,7 @@ void ACharacterMovement::MoveForward(float AxisValue)
     }
 }
 ```
-##### 그런 다음 SetupPlayerInputComponent에서 input과 움직이는 함수를 바인딩 시켰습니다.
+###### 그런 다음 SetupPlayerInputComponent에서 input과 움직이는 함수를 바인딩 시켰습니다.
 ```c++
 void ACharacterMovement::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -71,7 +71,7 @@ void ACharacterMovement::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 }
 ```
 
-##### 저희 게임에서는 활을 무기로 사용하는 게임이었기에 캐릭터가 활 시위를 당기는 함수가 필요하였습니다. StartCharge()에서 당기는 시간을 업데이트 시키고 canFire 변수를 true로 바꾸어 주었습니다.
+###### 저희 게임에서는 활을 무기로 사용하는 게임이었기에 캐릭터가 활 시위를 당기는 함수가 필요하였습니다. StartCharge()에서 당기는 시간을 업데이트 시키고 canFire 변수를 true로 바꾸어 주었습니다.
 ```c++
 void ACharacterMovement::StartCharge()
 {
@@ -91,7 +91,7 @@ void ACharacterMovement::StartCharge()
 	}
 }
 ```
-##### 이후 플레이어가 마우스 버튼을 놓았을 당시 StopCharge()를 불러와서 화살이 발사 조건에 충족을 시키면 Fire()를 호출하여 화살을 발사시킵니다.
+###### 이후 플레이어가 마우스 버튼을 놓았을 때 StopCharge()를 불러와서 화살이 발사 조건에 충족을 시키면 Fire()를 호출하여 화살을 발사시킵니다.
 ```c++
 void ACharacterMovement::StopCharge()
 {
@@ -136,7 +136,7 @@ void ACharacterMovement::StopCharge()
 	}
 }
 ```
-##### Fire함수에서는 AArrowProjectile라는 화살을 생성하고 속도를 업데이트 시켜줍니다. 화살에는 CollisionComponent를 가지고 있어 적에게 닿았을 시 적의 hp를 닳게 하였습니다.
+###### Fire함수에서는 AArrowProjectile라는 화살을 생성하고 속도를 업데이트 시켜줍니다. 화살에는 CollisionComponent를 가지고 있어 적에게 닿았을 시 적의 hp를 닳게 하였습니다.
 ```c++
 void ACharacterMovement::Fire()
 {
@@ -190,6 +190,10 @@ void ACharacterMovement::Fire()
 	}
 }
 ```
+
+<br>
+
+## **사진**
 
 {% capture carousel_images %}
 /assets/images/monster_a_salt/monster_menu.JPG

@@ -10,15 +10,15 @@ image: "/assets/images/background/ai.JPG"
 <br>
 {% include elements/video.html id="LgG7_HTG_Jk" %}
 <br>
-{% include elements/button.html link="https://drive.google.com/drive/folders/1dLWGEh5UEPsLmR4pTsldcWSleplPPPNk" text="Source Code" block=true %}
+{% include elements/button.html link="https://drive.google.com/drive/folders/1dLWGEh5UEPsLmR4pTsldcWSleplPPPNk" text="Source Code 링크 이동" block=true %}
 
 <br>
 
 ### **A* 알고리즘**
 
-##### 교수님이 제공한 프레임워크에서 A* 알고리즘을 사용하여 패스 파인딩을 구현하였습니다.
+###### 교수님이 제공한 프레임워크에서 A* 알고리즘을 사용하여 패스 파인딩을 구현하였습니다.
 
-##### 길을 찾는 업데이트 함수에서, while 반복문을 통해 openList에 저장된 노드들이 없어질 때까지 반복시킵니다. 현재 노드가 목표 노드와 일치하다면 COMPLETE를 리턴시키고, 아직 시스템이 처리 중이라면 PROCESSING, 만약 모든 노드들을 탐색했지만 목표 노드에 도달하지 못하였다면 IMPOSSIBLE을 리턴시키도록 하였습니다.
+###### 길을 찾는 업데이트 함수에서, while 반복문을 통해 openList에 저장된 노드들이 없어질 때까지 반복시킵니다. 현재 노드가 목표 노드와 일치하다면 COMPLETE를 리턴시키고, 아직 시스템이 처리 중이라면 PROCESSING, 만약 모든 노드들을 탐색했지만 목표 노드에 도달하지 못하였다면 IMPOSSIBLE을 리턴시키도록 하였습니다.
 
 ```c++
 while (!openList.empty())
@@ -89,7 +89,7 @@ if (openList.empty())
 
 ```
 
-##### NeighborChildNodes 함수에서는 주변의 다른 노드들의 위치를 확인하고 각각의 비용에 대해서 계산을 했습니다.
+###### NeighborChildNodes 함수에서는 주변의 다른 노드들의 위치를 확인하고 각각의 비용에 대해서 계산을 했습니다.
 
 ```c++
     int curr_x = curr.col;
@@ -181,7 +181,7 @@ if (openList.empty())
     }
 ```
 
-##### 그런 후 새로운 비용과 기존 비용을 합하여 업데이트 시킵니다. 만약 openList라는 찾아야 할 노드들에 이 노드가 존재할 경우 가장 비용이 싼 노드를 추가시키고 비싼 노드는 삭제합니다. 만약 closeList라는 이미 찾았던 노드들에 이 노드가 존재할 경우 비용을 확인하고 싸다면 openList에 넣도록 하였습니다.
+###### 그런 후 새로운 비용과 기존 비용을 합하여 업데이트 시킵니다. 만약 openList라는 찾아야 할 노드들에 이 노드가 존재할 경우 가장 비용이 싼 노드를 추가시키고 비싼 노드는 삭제합니다. 만약 closeList라는 이미 찾았던 노드들에 이 노드가 존재할 경우 비용을 확인하고 싸다면 openList에 넣도록 하였습니다.
 ``` c++
     int openList_size = openList.size();
     float cost = new_given_cost + CalculateHeuristic({ curr_y, curr_x }, goal, heuristic) * weight;
@@ -238,7 +238,7 @@ if (openList.empty())
     }
 ```
 
-##### 프로젝트 내에서 루트를 부드럽게 움직이도록 지시하였습니다. 저는 Catmull Rom 스플라인을 사용하여 곡선을 구현하였습니다. 구현 식은 [곡선&스플라인](https://tsyang.tistory.com/57)에서 참고를 하였습니다.
+###### 교수님께서 프로젝트 내에서 루트를 부드럽게 움직이도록 지시하였습니다. 저는 Catmull Rom 스플라인을 사용하여 곡선을 구현하였습니다. 구현 식은 [곡선&스플라인](https://tsyang.tistory.com/57)에서 참고를 하였습니다.
 ```c++
 Vec3 AStarPather::Catmull_Rom_Spline(Vec3 point_1, Vec3 point_2, Vec3 point_3, Vec3 point_4, float s)
 {
@@ -253,7 +253,7 @@ Vec3 AStarPather::Catmull_Rom_Spline(Vec3 point_1, Vec3 point_2, Vec3 point_3, V
 }
 ```
 
-##### 이 프로젝트를 통해서 전반적인 A* 알고리즘에 대해서 공부할 수 있었습니다.
+###### 이 프로젝트를 통해서 전반적인 A* 알고리즘에 대해서 공부할 수 있었습니다.
 
 <br>
 <br>
