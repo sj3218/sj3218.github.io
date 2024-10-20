@@ -1,11 +1,11 @@
 ---
 layout: page
-name: Treasuer of the Sea
+name: Treasure of the Sea
 tools: [Game, 3D, Unity]
 image: "/assets/images/background/treasure.JPG"
 ---
 
-# Treasuer of the Sea
+# Treasure of the Sea
 <br>
 {% include elements/video.html id="BgBBYVEOf8c" %}
 
@@ -28,16 +28,17 @@ image: "/assets/images/background/treasure.JPG"
     <p>⏳ 개발 기간: 2022.05 ~ 2021.08</p>
     <p>🛠️ Engine: Unity Engine</p>
     <p>⚙️ Github: <button onclick="window.location.href='https://github.com/wonju-cho/Treasure_of_the_Sea/tree/main/PlatinumChest/TreasureOfTheSea';">Github 링크</button></p>
+    <p>⚙️ Source code: <button onclick="window.location.href='https://drive.google.com/drive/folders/1z9hZJIo0m5z7BJ1OkOzG8SxnNC9K1fsH';">Source Code 링크</button></p>
   </div>
 </div>
 
 <br>
 
-### 플레이어 
-###### 플레이어 캐릭터는 무료 에셋을 다운 받아 사용하고 애니메이션은 직접 만들었습니다.
+### **플레이어** 
+##### 플레이어 캐릭터는 무료 에셋을 다운 받아 사용하고 애니메이션은 직접 만들었습니다.
 ![alt text](
 /assets/images/treasure_of_the_sea/player_animation.JPG)
-###### 캐릭터의 움직임은 지정된 속도를 조절하여 이동시켰습니다. 플레이어 캐릭터는 평소 활을 등에 매고 돌아다니지만 적을 향해 화살을 당길 때만 활을 장착하게 구현했습니다. 
+##### 캐릭터의 움직임은 지정된 속도를 조절하여 이동시켰습니다. 플레이어 캐릭터는 평소 활을 등에 매고 돌아다니지만 적을 향해 화살을 당길 때만 활을 장착하게 구현했습니다. 
 ```cs
 if(is_aiming)
 {
@@ -72,7 +73,7 @@ else
 
 ```
 
-###### 화살 발사는 Raycast를 사용하여 화면에 cross hair 표시를 하고, 프리팹으로 만든 화살을 생성하여 포물선에 맞춰 발사되게 하였습니다. 화살이 없을 경우에는 발사를 하지 못하도록 하였습니다.
+##### 화살 발사는 Raycast를 사용하여 화면에 cross hair 표시를 하고, 프리팹으로 만든 화살을 생성하여 포물선에 맞춰 발사되게 하였습니다. 화살이 없을 경우에는 발사를 하지 못하도록 하였습니다.
 
 ```cs
 ray = Camera.main.ScreenPointToRay(centerPos);
@@ -116,11 +117,11 @@ public void Fire(Vector3 hitPoint)
 
 <br>
 
-### 적 AI 구현
-###### 적 AI를 구현하였습니다. 플레이어와 같은 에셋이고 색만 바꾸었습니다. 적의 종류에는 melee타입과 range타입이 있습니다. 두 종류의 적은 애니메이션이 비슷하지만 Attack State부분만 다릅니다.
+### **적 AI 구현**
+##### 적 AI를 구현하였습니다. 플레이어와 같은 에셋이고 색만 바꾸었습니다. 적의 종류에는 melee타입과 range타입이 있습니다. 두 종류의 적은 애니메이션이 비슷하지만 Attack State부분만 다릅니다.
 ![alt text](
 /assets/images/treasure_of_the_sea/enemy_animation.JPG)
-###### 평소에는 idle 상태를 유지하며 주변을 순찰하도록 합니다. 플레이어가 일정 간격 안으로 접근을 한다면 Chase State로 바꾸었습니다.
+##### 평소에는 idle 상태를 유지하며 주변을 순찰하도록 합니다. 플레이어가 일정 간격 안으로 접근을 한다면 Chase State로 바꾸었습니다.
 ```cs
 timer += Time.deltaTime;
 if (timer > 5f)
@@ -135,7 +136,7 @@ if(distance < chaseRange)
     animator.SetBool("isChasing", true);
 }
 ```
-###### 플레이어가 도망을 가서 적과의 거리가 멀어지면 쫓는 것을 구만두게 하였고, 적이 플레이어에게 공격할 수 있는 거리에 도달하면 Attack State로 바꾸었습니다.
+##### 플레이어가 도망을 가서 적과의 거리가 멀어지면 쫓는 것을 구만두게 하였고, 적이 플레이어에게 공격할 수 있는 거리에 도달하면 Attack State로 바꾸었습니다.
 
 ```cs
 float distance = Vector3.Distance(player.position, animator.transform.position);
@@ -155,7 +156,7 @@ if (distance < attackRange)
 }
 ```
 
-###### 나무, 돌과 같이 적 AI는 죽을 때 일정 비율로 아이템을 제공하도록 구현하였습니다.
+##### 나무, 돌과 같이 적 AI는 죽을 때 일정 비율로 아이템을 제공하도록 구현하였습니다.
 ```cs
 public void DropItem()
 {

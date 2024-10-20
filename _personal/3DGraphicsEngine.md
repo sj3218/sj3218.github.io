@@ -11,56 +11,46 @@ image: "/assets/images/background/graphics.JPG"
 {% include elements/video.html id="gCqtzcakhlA" %}
 
 <br>
-
-<div style="display: flex; gap: 20px;">
-  <div style="background-color: #2c2c2c; padding: 20px; border-radius: 8px; color: white; width: 50%;">
-    <h2>Description</h2><br>
-    <p>
-      이 프로젝트는 Modern GPU 구조를 이해하고 OpenGL을 이용한 그래픽스 엔진을 개발하기 위한 목적으로 진행되었습니다. 메인 오브젝트를 중심으로 빛 구체들이 회전하는 씬을 구현했습니다. 
-    </p>
-  </div>
-  <div style="background-color: #2c2c2c; padding: 20px; border-radius: 8px; color: white; width: 50%;">
-    <h2>Project Info</h2><br>
-    <p>👥 팀 규모: 솔로 프로젝트</p>
-    <p>⏳ 개발 기간: 2021.08 ~ 2022.04</p>
-    <p>🛠️ Engine: 자체 엔진(C++, OpenGL, ImGui, GLSL)</p>
-    <p>⚙️ Git hub: <button onclick="window.location.href='https://github.com/sj3218/Graphics-Project-3';">링크 이동</button></p>
-  </div>
-</div>
+{% include elements/button.html link="https://drive.google.com/drive/folders/1ELZOdxq4NJ2ycokOP0fK0VWISKeawJFC" text="Source Code" block=true %}
 
 <br>
 
+### **Description**
 
-### Shading 알고리즘
+##### 이 프로젝트는 Modern GPU 구조를 이해하고 OpenGL을 이용한 그래픽스 엔진을 개발하기 위한 목적으로 진행되었습니다. 메인 오브젝트를 중심으로 빛 구체들이 회전하는 씬을 구현했습니다. 
 
-###### 이 프로젝트에서는 Phong Lighting, Phong Shading, Blinn Shading 알고리즘을 구현하였습니다. 
-- ###### **Phong Lighting**은 vertex shader에서 계산된 반사 벡터를 사용하여 diffuse와 specular 색을 계산합니다.
-- ###### **Phong Shading**은 Phong Lighting과 유사하지만, 빛 계산을 fragment shader에서 수행하는 방식입니다. 
-- ###### **Blinn Shading**에서는 반사 벡터를 직접 계산하는 대신, 빛 벡터와 시점 벡터를 더해 이를 normalize시킨 벡터를 사용하여 반사 효과를 처리했습니다.
+<br>
 
-###### 기존에 반사벡터를 구하기 위해서 아래의 식을 사용하여
+### **Shading 알고리즘**
+
+##### 이 프로젝트에서는 Phong Lighting, Phong Shading, Blinn Shading 알고리즘을 구현하였습니다. 
+- ##### **Phong Lighting**은 vertex shader에서 계산된 반사 벡터를 사용하여 diffuse와 specular 색을 계산합니다.
+- ##### **Phong Shading**은 Phong Lighting과 유사하지만, 빛 계산을 fragment shader에서 수행하는 방식입니다. 
+- ##### **Blinn Shading**에서는 반사 벡터를 직접 계산하는 대신, 빛 벡터와 시점 벡터를 더해 이를 normalize시킨 벡터를 사용하여 반사 효과를 처리했습니다.
+
+##### 기존에 반사벡터를 구하기 위해서 아래의 식을 사용하여
 
 ![alt text](
 /assets/images/graphics_engine/equation.JPG)
 
-###### 이처럼 구현을 하였다면
+##### 이처럼 구현을 하였다면
 ```glsl
 vec3 reflectDir = 2*dot(normal, lightDir) *normal - lightDir;
 ```
-###### Blinn Shading에서는 반사벡터를 이렇게 구하였습니다.
+##### Blinn Shading에서는 반사벡터를 이렇게 구하였습니다.
 ```glsl
 vec3 reflectDir = (lightDir + view);
 reflectDir = normalize(reflectDir);
 ```
 
-###### 결과적으로 **Blinn Shading**은 다른 쉐이딩과 비슷한 결과를 제공하고 다른 반사 벡터 계산하는데 비용이 비싼 다른 쉐이딩 알고리즘 보다 더 효율적인 것을 알 수 있었습니다.
+##### 결과적으로 **Blinn Shading**은 다른 쉐이딩과 비슷한 결과를 제공하고 다른 반사 벡터 계산하는데 비용이 비싼 다른 쉐이딩 알고리즘 보다 더 효율적인 것을 알 수 있었습니다.
 
 
 <br>
 
-### 환경 맵핑
+### **환경 맵핑**
 
-###### 이 프로젝트에서는 Skybox와 환경맵핑(반사, 굴절)을 보여줍니다. OpenGL에서 제공하는 큐브 맵핑 함수를 쓰지 않고 직접 구현을 해보며 어떤 원리로 작동을 하는지 공부하였습니다. FBO에 6개의 다른 텍스처들을 **skyTexture**에 저장하고 CubeMapping 함수에서 저장된 텍스처들을 활용하여 물체의 표면에 반사 및 굴절 효과를 적용하고, 이를 통해 현실감 있는 장면을 연출 할 수 있었습니다.  
+##### 이 프로젝트에서는 Skybox와 환경맵핑(반사, 굴절)을 보여줍니다. OpenGL에서 제공하는 큐브 맵핑 함수를 쓰지 않고 직접 구현을 해보며 어떤 원리로 작동을 하는지 공부하였습니다. FBO에 6개의 다른 텍스처들을 **skyTexture**에 저장하고 CubeMapping 함수에서 저장된 텍스처들을 활용하여 물체의 표면에 반사 및 굴절 효과를 적용하고, 이를 통해 현실감 있는 장면을 연출 할 수 있었습니다.  
 
 ```glsl
 
@@ -162,11 +152,11 @@ vec3 CubeMapping(vec3 pos)
 /assets/images/graphics_engine/graphics_environment/blending_reflection.JPG
 {% endcapture %}
 
-###### 또한 Hybrid Rendering 기법을 사용해 모든 빛들을 forward 렌더링 기법을 사용하여 버퍼에 저장하고 환경 맵핑을 받는 메인 오브젝트에 deferred 렌더링 기법을 사용해서 렌더링 처리 하였습니다.
+##### 또한 Hybrid Rendering 기법을 사용해 모든 빛들을 forward 렌더링 기법을 사용하여 버퍼에 저장하고 환경 맵핑을 받는 메인 오브젝트에 deferred 렌더링 기법을 사용해서 렌더링 처리 하였습니다.
 
-### Dynamics 빛 구현
+### **Dynamics 빛 구현**
 
-###### Point, Directional, Spot 빛을 구현하였습니다.
+##### Point, Directional, Spot 빛을 구현하였습니다.
 
 {% capture carousel_images %}
 /assets/images/graphics_engine/point_light.JPG

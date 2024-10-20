@@ -11,11 +11,14 @@ image: "/assets/images/background/math.JPG"
 {% include elements/video.html id="LgG7_HTG_Jk" %}
 
 <br>
+{% include elements/button.html link="https://drive.google.com/drive/folders/1EcWeskiSsk8NeywwD8uC2kODcikfnT1a" text="Source Code" block=true %}
 
-### Curve
+<br>
 
-###### Interpolating Polynomial 함수를 3D 버전으로 구현하였습니다. 이 프로젝트를 진행하기 위해 [**Newton Formula**](https://en.wikipedia.org/wiki/Newton_polynomial)에 대해서 공부를 하였습니다.
-###### 먼저 InitializeCoefficientForNewton() 함수를 만들어 각 x,y,z 축마다 Newton Formula를 위한 계수를 구하였습니다. 그리고 이후에 점이 추가 될 때마다 이 함수를 불러 계수를 업데이트 하도록 하였습니다.
+### **Curve**
+
+##### Interpolating Polynomial 함수를 3D 버전으로 구현하였습니다. 이 프로젝트를 진행하기 위해 [**Newton Formula**](https://en.wikipedia.org/wiki/Newton_polynomial)에 대해서 공부를 하였습니다.
+##### 먼저 InitializeCoefficientForNewton() 함수를 만들어 각 x,y,z 축마다 Newton Formula를 위한 계수를 구하였습니다. 그리고 이후에 점이 추가 될 때마다 이 함수를 불러 계수를 업데이트 하도록 하였습니다.
 ```c++
 else if (type == 2) //z축
 {
@@ -48,7 +51,7 @@ else if (type == 2) //z축
     }
 }
 ```
-###### 곡선을 그리기 위해 CalculationSplinePoint() 함수를 작성하였습니다. 각 점 마다 Newton 방정식을 사용하여 곡선의 위치를 저장하였습니다.
+##### 곡선을 그리기 위해 CalculationSplinePoint() 함수를 작성하였습니다. 각 점 마다 Newton 방정식을 사용하여 곡선의 위치를 저장하였습니다.
 ```c++
 void SplinePath::CalculationSplinePoint()
 {
@@ -87,7 +90,7 @@ void SplinePath::CalculationSplinePoint()
     }
 }
 ```
-###### NewtonForm()함수에서는 실제 Newton 방정식을 수행하는 함수입니다. 각 축마다 계산을 하여 나온 값을 리턴시켰습니다.
+##### NewtonForm()함수에서는 실제 Newton 방정식을 수행하는 함수입니다. 각 축마다 계산을 하여 나온 값을 리턴시켰습니다.
 ```c++
 if (type == 0)//x축
 {
@@ -118,9 +121,9 @@ if (type == 0)//x축
 
 <br>
 
-### K means Clustering 알고리즘
+### **K means Clustering 알고리즘**
 
-###### C++과 OpenCV를 사용하여 구현였습니다. 인풋된 이미지를 받아와 RGB를 저장하고 k 값이 3부터 차례대로 늘어나며 어떤 결과 값을 보여주는지 이미지를 아웃풋 시킵니다. k 값은 이미지에서 보여줄 수 있는 색깔의 종류 갯수입니다. 사진에 보이는 것 처럼 k가 3일 때는 세개의 색상만을 보여줍니다.
+##### C++과 OpenCV를 사용하여 구현였습니다. 인풋된 이미지를 받아와 RGB를 저장하고 k 값이 3부터 차례대로 늘어나며 어떤 결과 값을 보여주는지 이미지를 아웃풋 시킵니다. k 값은 이미지에서 보여줄 수 있는 색깔의 종류 갯수입니다. 사진에 보이는 것 처럼 k가 3일 때는 세개의 색상만을 보여줍니다.
 
 {% capture carousel_images %}
 /assets/images/math/k_means/mario_3.JPG
@@ -138,3 +141,11 @@ if (type == 0)//x축
 ###### 마리오 원본 사진
 ![alt text](
 /assets/images/math/k_means/original_mario.JPG)
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
