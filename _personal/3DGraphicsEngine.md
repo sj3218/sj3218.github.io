@@ -151,6 +151,7 @@ vec3 CubeMapping(vec3 pos)
 /assets/images/graphics_engine/graphics_environment/chromatic_aberration.JPG
 /assets/images/graphics_engine/graphics_environment/blending_reflection.JPG
 {% endcapture %}
+{% include elements/carousel.html %}
 
 ###### 또한 Hybrid Rendering 기법을 사용해 모든 빛들을 forward 렌더링 기법을 사용하여 버퍼에 저장하고 환경 맵핑을 받는 메인 오브젝트에 deferred 렌더링 기법을 사용해서 렌더링 처리 하였습니다.
 
@@ -165,6 +166,14 @@ vec3 CubeMapping(vec3 pos)
 /assets/images/graphics_engine/directional.JPG
 /assets/images/graphics_engine/spot_light.JPG
 {% endcapture %}
+{% include elements/carousel.html %}
+
+
+<br>
+
+## **배운 점**
+###### 이 그래픽스 엔진 개발을 통해서 현대 GPU에 관해서 더 자세히 알 수 있었습니다. CPU에는 픽셀 하나하나 색깔을 입히는 반면 GPU에서는 병렬적으로 처리를 하여 메모리 상 효율적이었습니다. 또한 직접 glsl 을 이용해 쉐이더 알고리즘을 구현하며 물체 표면에서의 빛 반사와 굴곡을 계산하는 방법에 대해 깊이 이해할 수 있었습니다. 
+###### 여러 빛을 계산하였을 때 발생하는 성능 저하 문제를 해결하기 위해 forward 렌더링 기법과 deferred 렌더링 기법에 대한 차이를 배울 수 있었습니다. 
 
 <br>
 <br>

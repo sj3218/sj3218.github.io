@@ -40,62 +40,62 @@ image: "/assets/images/background/freeze.JPG"
 ###### FindPathUsingAstar 함수를 만들어 적의 위치에서 플레이어 위치를 찾을 수 있다면 true를 리턴시키도록 하였습니다. 
 ```c#
 public bool FindPathUsingAStar(Vector3 playerPos, Vector3 enemyPos)
+{
+    Node start_node = grid.GetNodePosFromWorldPosition(playerPos);
+    Node goal_node = grid.GetNodePosFromWorldPosition(enemyPos);
+
+    Heap<Node> openList = new Heap<Node>(grid.MaxSize);
+    HashSet<Node> closeList = new HashSet<Node>();
+
+    //Push Start node onto the Open List.
+    openList.Add(start_node);
+
+    Node parent_node;
+
+    //Loop
+    while (openList.Count > 0)
     {
-        Node start_node = grid.GetNodePosFromWorldPosition(playerPos);
-        Node goal_node = grid.GetNodePosFromWorldPosition(enemyPos);
+        parent_node = openList.RemoveFirst();
 
-        Heap<Node> openList = new Heap<Node>(grid.MaxSize);
-        HashSet<Node> closeList = new HashSet<Node>();
-
-        //Push Start node onto the Open List.
-        openList.Add(start_node);
-
-        Node parent_node;
-
-        //Loop
-        while (openList.Count > 0)
+        //if node == goal -> path finding.
+        if (parent_node == goal_node)
         {
-            parent_node = openList.RemoveFirst();
+            stepPath = goal_node.parent.worldPos;
+            step_goal_node = goal_node.parent;
 
-            //if node == goal -> path finding.
-            if (parent_node == goal_node)
-            {
-                stepPath = goal_node.parent.worldPos;
-                step_goal_node = goal_node.parent;
-
-                return true;
-            }
-
-            int currCost;
-
-            foreach (Node child in grid.GetNeighborNodes(parent_node))
-            {
-                if (closeList.Contains(child) || !child.canWalk)
-                {
-                    continue;
-                }
-
-                currCost = parent_node.gCost + GetDistance(parent_node, child);
-
-                if (currCost < child.gCost || !openList.Contains(child))
-                {
-                    child.gCost = currCost;
-                    child.hCost = GetDistance(child, goal_node);
-                    child.parent = parent_node;
-
-                    if (!openList.Contains(child))
-                    {
-                        openList.Add(child);
-                    }
-                }
-            }
-
-            closeList.Add(parent_node);
+            return true;
         }
-        return false;
+
+        int currCost;
+
+        foreach (Node child in grid.GetNeighborNodes(parent_node))
+        {
+            if (closeList.Contains(child) || !child.canWalk)
+            {
+                continue;
+            }
+
+            currCost = parent_node.gCost + GetDistance(parent_node, child);
+
+            if (currCost < child.gCost || !openList.Contains(child))
+            {
+                child.gCost = currCost;
+                child.hCost = GetDistance(child, goal_node);
+                child.parent = parent_node;
+
+                if (!openList.Contains(child))
+                {
+                    openList.Add(child);
+                }
+            }
+        }
+
+        closeList.Add(parent_node);
     }
+    return false;
+}
 ```
-###### 저는 navemesh가 아닌 격자 칸을 이용해서 Unity가 제공하는 ai 함수보다 성능이 떨어졌지만 이 경험을 통해 A* 알고리즘에 대해서 더 공부할 수 있었습니다.
+
 <br>
 
 ### **플레이어 시야**
@@ -104,75 +104,81 @@ public bool FindPathUsingAStar(Vector3 playerPos, Vector3 enemyPos)
 ###### EnemyInRadius 함수를 만들어 적이 플레이어 반경 안에 들어오는지 확인을 했습니다. 시야 각에 들어오더라도 멀리 떨어진 적들은 움직일 수 있도록 하기 위해서 였습니다.
 ```c#
 private bool EnemyInRadius(Vector3 enemyPos)
+{
+    float distance;
+    Vector3 playerPos = transform.position;
+    float x = Mathf.Pow((enemyPos.x - playerPos.x), 2);
+    float y = Mathf.Pow((enemyPos.z - playerPos.z), 2);
+
+    distance = Mathf.Pow(x + y, 0.5f);
+
+    if(distance <= viewRadius)
     {
-        float distance;
-        Vector3 playerPos = transform.position;
-        float x = Mathf.Pow((enemyPos.x - playerPos.x), 2);
-        float y = Mathf.Pow((enemyPos.z - playerPos.z), 2);
-
-        distance = Mathf.Pow(x + y, 0.5f);
-
-        if(distance <= viewRadius)
-        {
-            return true;
-        }
-        return false;
+        return true;
     }
+    return false;
+}
 
 ```
 ###### 반경 안에 들어온 적들 중 플레이어가 볼 수 있는 적을 확인하고 그 적의 isVisibleFromPlayer를 true로 바꾸어 멈출 수 있도록 했습니다.
 ```c#
 void FindVisibleEnemy()
+{
+    Transform enemy;
+    Vector3 dir;
+    float distance;
+
+    for (int i = 0; i < enemies.Length; ++i)
     {
-        Transform enemy;
-        Vector3 dir;
-        float distance;
+        enemy = enemies[i];
+        dir = (enemy.position - transform.position).normalized;
 
-        for (int i = 0; i < enemies.Length; ++i)
+        if(EnemyInRadius(enemy.position))
         {
-            enemy = enemies[i];
-            dir = (enemy.position - transform.position).normalized;
-
-            if(EnemyInRadius(enemy.position))
+            if (Vector3.Angle(transform.forward, dir) < viewAngle / 2)
             {
-                if (Vector3.Angle(transform.forward, dir) < viewAngle / 2)
-                {
-                    distance = Vector3.Distance(transform.position, enemy.position);
+                distance = Vector3.Distance(transform.position, enemy.position);
 
-                    if (!Physics.Raycast(transform.position, dir, distance, wallMask))
-                    {
-                        //visible
-                        enemy.GetComponent<EnemyAI>().isVisibleFromPlayer = true;
-                        continue;
-                    }
+                if (!Physics.Raycast(transform.position, dir, distance, wallMask))
+                {
+                    //visible
+                    enemy.GetComponent<EnemyAI>().isVisibleFromPlayer = true;
+                    continue;
                 }
             }
-
-            enemy.GetComponent<EnemyAI>().isVisibleFromPlayer = false;
         }
+
+        enemy.GetComponent<EnemyAI>().isVisibleFromPlayer = false;
     }
+}
 ```
 <br>
 
 ### **Cellphone UI**
 ![alt text](
-  /assets/images/freeze_tag/FreezeTag_CellPhoneUI.jpg)
+  /assets/images/freeze_tag/FreezeTag_CellPhoneUI.png)
   
 ###### 플레이어가 게임 중 미니맵, 탈출을 시킨 NPC 수, Health 수, 모은 보석 수에 대해서 확인 할 수 있도록 휴대폰 UI를 구현하였습니다.
 ###### 모든 조건들이 맞아 떨어지는지 DoesGameEnd()함수를 불러 확인하고 게임을 종료할 수 있게 하였습니다.
 ```c#
 public void DoesGameEnd()
-    {
+{
 
-        if (count_released_npc == npc_images.Length)
+    if (count_released_npc == npc_images.Length)
+    {
+        if (gem_current_count == gem_total_count)
         {
-            if (gem_current_count == gem_total_count)
-            {
-                is_end_the_game = true;
-            }
+            is_end_the_game = true;
         }
     }
+}
 ```
+
+<br>
+
+## **배운 점**
+###### 이 프로젝트에서 A* 알고리즘을 직접 구현하여 AI를 적용시켜 보았습니다. Unity에서 제공하는 NavMesh 대신 격자 기반의 경로 탐색을 선택하였는데, 성능은 Unity의 AI 함수보다 떨어졌지만 이 과정을 통해 A* 알고리즘의 작동 원리를 더 깊이 이해하게 되었습니다.
+###### 처음으로 VR을 활용한 게임을 제작하며 VR 컨트롤러와 상호작용하는 방법을 익혔습니다. 개발 중 디버깅 과정에서는 항상 VR 기기를 착용할 수 없었기 때문에, 키보드를 이용한 테스트 컨트롤러를 별도로 구현했습니다. 이로 인해 디버깅 및 테스트 단계에서 개발 효율성을 높일 수 있었지만, 이후 실제 VR 환경으로 다시 전환하는 과정이 복잡해지는 문제도 겪었습니다. 이를 통해 VR 개발의 효율성을 높이는 방법과 전환 과정의 복잡성을 줄이기 위한 전략의 필요성을 깨달았습니다.
 
 
 <br>
