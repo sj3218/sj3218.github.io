@@ -143,7 +143,9 @@ if (type == 0)//x축
 
 <style>
 .carousel-inner img {
-    max-height: 300px; /* 원하는 높이로 조정 */
+    max-height: 50%;  /* 원하는 높이로 조정 */
+    width: auto;      /* 비율에 따라 자동 조정 */
+    height: auto;     /* 비율에 따라 자동 조정 */
     object-fit: cover; /* 이미지 비율을 유지하며 잘라내기 */
 }
 </style>
@@ -185,10 +187,11 @@ if (type == 0)//x축
     </a>
 </div>
 
+
 <br>
 
 ###### 마리오 원본 사진
-<img src="/assets/images/math/k_means/original_mario.jpg" alt="alt text" style="width: 50%; height: auto;">
+<img src="/assets/images/math/k_means/original_mario.jpg" alt="alt text" style="width: auto; height: 50%;">
 
 
 <br>
