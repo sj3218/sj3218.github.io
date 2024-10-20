@@ -144,7 +144,7 @@ vec3 CubeMapping(vec3 pos)
 }
 ```
 <br>
-{% capture carousel_images_1 %}
+{% capture carousel_images %}
 /assets/images/graphics_engine/graphics_environment/reflection.JPG
 /assets/images/graphics_engine/graphics_environment/refraction.JPG
 /assets/images/graphics_engine/graphics_environment/fresnel.JPG
@@ -161,13 +161,36 @@ vec3 CubeMapping(vec3 pos)
 
 ###### Point, Directional, Spot 빛을 구현하였습니다.
 
-{% capture carousel_images_2 %}
+<!--
+{% capture carousel_images %}
 /assets/images/graphics_engine/point_light.JPG
 /assets/images/graphics_engine/directional.JPG
 /assets/images/graphics_engine/spot_light.JPG
 {% endcapture %}
 {% include elements/carousel.html %}
+-->
 
+<div id="carousel2" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/assets/images/graphics_engine/point_light.JPG" class="d-block w-100" alt="Point Light">
+        </div>
+        <div class="carousel-item">
+            <img src="/assets/images/graphics_engine/directional.JPG" class="d-block w-100" alt="Directional Light">
+        </div>
+        <div class="carousel-item">
+            <img src="/assets/images/graphics_engine/spot_light.JPG" class="d-block w-100" alt="Spot Light">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carousel2" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel2" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
 <br>
 

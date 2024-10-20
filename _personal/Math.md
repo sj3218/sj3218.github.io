@@ -126,7 +126,7 @@ if (type == 0)//x축
 ###### Data Science 수학 수업에서 K-means Clustering 알고리즘에 대해서 배우고 이 알고리즘을 이용하여 입력 받은 사진이 k값에 따라 어떤 결과 값을 갖는지 테스트 해보고자 한 프로젝트 입니다. 
 ###### 이 프로젝트는 C++과 OpenCV를 사용하여 구현였습니다. 인풋된 이미지를 받아와 RGB를 저장하고 k 값이 3부터 차례대로 늘어나며 어떤 결과 값을 보여주는지 이미지를 아웃풋 시킵니다. k 값은 이미지에서 보여줄 수 있는 색깔의 종류 갯수입니다. 사진에 보이는 것 처럼 k가 3일 때는 세개의 색상만을 보여줍니다.
 
-{% capture carousel_images_3 %}
+{% capture carousel_images %}
 /assets/images/math/k_means/mario_3.jpg
 /assets/images/math/k_means/mario_4.jpg
 /assets/images/math/k_means/mario_5.jpg
