@@ -25,7 +25,7 @@ image: "/assets/images/background/treasure.JPG"
     <h2>Project Info</h2><br>
     <p>👨‍💻 직책: 게임플레이 프로그래머</p>
     <p>👥 팀 규모: 2</p>
-    <p>⏳ 개발 기간: 2022.05 ~ 2021.08</p>
+    <p>⏳ 개발 기간: 2022.05 ~ 2022.08</p>
     <p>🛠️ Engine: Unity Engine</p>
     <p>⚙️ Github: <button onclick="window.location.href='https://github.com/wonju-cho/Treasure_of_the_Sea/tree/main/PlatinumChest/TreasureOfTheSea';">Github 링크</button></p>
     <p>⚙️ Source code: <button onclick="window.location.href='https://drive.google.com/drive/folders/1z9hZJIo0m5z7BJ1OkOzG8SxnNC9K1fsH';">Source Code 링크</button></p>
@@ -136,7 +136,7 @@ if(distance < chaseRange)
     animator.SetBool("isChasing", true);
 }
 ```
-##### 플레이어가 도망을 가서 적과의 거리가 멀어지면 쫓는 것을 구만두게 하였고, 적이 플레이어에게 공격할 수 있는 거리에 도달하면 Attack State로 바꾸었습니다.
+###### 플레이어가 도망을 가서 적과의 거리가 멀어지면 쫓는 것을 그만두게 하였고, 적이 플레이어에게 공격할 수 있는 거리에 도달하면 Attack State로 바꾸었습니다.
 
 ```cs
 float distance = Vector3.Distance(player.position, animator.transform.position);
@@ -156,7 +156,7 @@ if (distance < attackRange)
 }
 ```
 
-##### 나무, 돌과 같이 적 AI는 죽을 때 일정 비율로 아이템을 제공하도록 구현하였습니다.
+###### 나무, 돌과 같이 적 AI는 죽을 때 일정 비율로 아이템을 제공하도록 구현하였습니다.
 ```cs
 public void DropItem()
 {
@@ -183,6 +183,12 @@ public void DropItem()
 ```
 <br>
 
+## **배운 점**
+###### 이 프로젝트는 유니티 엔진을 통해 유니티 게임 개발의 기초를 다질 수 있었습니다. Prefab을 사용하여 게임 오브젝트의 재사용성을 높이고 다양한 인스턴스를 쉽게 관리하는 법을 배웠습니다. 또한 Animator를 활용하여 캐릭터의 다양한 애니메이션을 제어하는 방법을 익혔습니다.
+
+<br>
+
+
 ## **사진**
 
 {% capture carousel_images %}
@@ -195,10 +201,6 @@ public void DropItem()
 {% include elements/carousel.html %}
 
 
-<br>
-
-## **배운 점**
-###### 이 프로젝트는 유니티 엔진을 통해 게임 개발의 기초를 다질 수 있었습니다. Prefab을 사용하여 게임 오브젝트의 재사용성을 높이고 다양한 인스턴스를 쉽게 관리하는 법을 배웠습니다. 또한 Animator를 활용하여 캐릭터의 다양한 애니메이션을 제어하는 방법을 익혔습니다.
 
 <br>
 <br>

@@ -144,7 +144,7 @@ vec3 CubeMapping(vec3 pos)
 }
 ```
 <br>
-{% capture carousel_images %}
+{% capture carousel_images_1 %}
 /assets/images/graphics_engine/graphics_environment/reflection.JPG
 /assets/images/graphics_engine/graphics_environment/refraction.JPG
 /assets/images/graphics_engine/graphics_environment/fresnel.JPG
@@ -161,7 +161,7 @@ vec3 CubeMapping(vec3 pos)
 
 ###### Point, Directional, Spot 빛을 구현하였습니다.
 
-{% capture carousel_images %}
+{% capture carousel_images_2 %}
 /assets/images/graphics_engine/point_light.JPG
 /assets/images/graphics_engine/directional.JPG
 /assets/images/graphics_engine/spot_light.JPG

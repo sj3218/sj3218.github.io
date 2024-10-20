@@ -4,12 +4,12 @@
 
 - name: GLSL
   percentage: 80
-  color: 1769ff
+  color: danger
 
 - name: C#
   percentage: 70
-  color: 3b5998
+  color: danger
 
 - name: Python
   percentage: 60
-  color: secondary
+  color: danger
