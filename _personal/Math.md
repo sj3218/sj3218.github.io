@@ -8,7 +8,7 @@ image: "/assets/images/background/math.JPG"
 # Math Programming
 
 <br>
-{% include elements/video.html id="LgG7_HTG_Jk" %}
+{% include elements/video.html id="WPd4I39zXfk" %}
 
 <br>
 {% include elements/button.html link="https://drive.google.com/drive/folders/1EcWeskiSsk8NeywwD8uC2kODcikfnT1a" text="Source Code 링크 이동" block=true %}
